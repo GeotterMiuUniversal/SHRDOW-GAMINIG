@@ -250,3 +250,101 @@
     </script>
 </body>
   </html>
+            </div> <!-- Cierra payment-box (línea que ya tienes) -->
+        </div> <!-- Cierra sección Contacto #contact -->
+    </main> <!-- Cierra Contenido Principal -->
+
+    <footer style="text-align: center; padding: 2rem; margin-top: 3rem; color: #aaa; border-top: 1px solid #333;">
+        <p>&copy; 2026 SHRDOW GAMING. Precios en tiempo real.</p>
+    </footer>
+
+    <script>
+        const whatsappNumber = "584262305112";
+        const FALLBACK_RATE = 36.50;
+        let currentRate = FALLBACK_RATE;
+
+        const ffData = [
+            { amount: 110, label: '💎', usd: 30.14 }, { amount: 220, label: '💎', usd: 57.53 },
+            { amount: 341, label: '💎', usd: 90.41 }, { amount: 451, label: '💎', usd: 120.55 },
+            { amount: 572, label: '💎', usd: 139.73 }, { amount: 1155, label: '💎', usd: 249.32 },
+            { amount: 2376, label: '💎', usd: 493.15 }, { amount: 6138, label: '💎', usd: 1232.88 },
+            { amount: 'Pase Booyah', label: '🎟', usd: 142.47 }, { amount: 'Tarjeta Básica (80💎)', label: '📅', usd: 18.08 },
+            { amount: 'Tarjeta Semanal (340💎)', label: '📅', usd: 71.00 }, { amount: 'Tarjeta Mensual (1800💎)', label: '🗓', usd: 350.68 }
+        ];
+
+        const bsData = [
+            { amount: 51, label: '🪙', usd: 19.18 }, { amount: 105, label: '🪙', usd: 28.76 },
+            { amount: 320, label: '🪙', usd: 92.60 }, { amount: 540, label: '🪙', usd: 158.90 },
+            { amount: 1100, label: '🪙', usd: 315.89 }, { amount: 2260, label: '🪙', usd: 638.36 },
+            { amount: 5800, label: '🪙', usd: 1468.49 }
+        ];
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+            if(window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+        }
+
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        function sendWhatsapp(prod) {
+            const msg = `Hola SHRDOW GAMING, me interesa la pantalla de ${prod}. ¿Precio?`;
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        async function fetchRate() {
+            const bar = document.getElementById('rateBar');
+            if(!bar) return;
+            bar.innerHTML = "🔄 Buscando tasa...";
+            try {
+                const res = await fetch('https://pydolarvenezuela-api.vercel.app/api/v1/dolar/page?page=bcv');
+                if(!res.ok) throw new Error();
+                const data = await res.json();
+                let rate = 0;
+                if(data.monitors?.bcv) rate = parseFloat(data.monitors.bcv.price);
+                else if(data.price) rate = parseFloat(data.price);
+                
+                if(rate > 0) {
+                    currentRate = rate;
+                    bar.innerHTML = `✅ Tasa BCV: Bs. <span class="rate-value">${rate.toFixed(2)}</span> / USD`;
+                    renderProducts();
+                } else throw new Error();
+            } catch(e) {
+                console.warn("Error tasa, usando base", e);
+                bar.innerHTML = `ℹ️ Tasa referencia: Bs. <span class="rate-value">${currentRate.toFixed(2)}</span> / USD`;
+                renderProducts();
+            }
+        }
+
+        function renderProducts() {
+            renderSec('ff-products', ffData, 'Free Fire');
+            renderSec('bs-products', bsData, 'Blood Strike');
+        }
+
+        function renderSec(id, data, game) {
+            const cont = document.getElementById(id);
+            if(!cont) return;
+            cont.innerHTML = '';
+            data.forEach(item => {
+                const price = (item.usd * currentRate).toFixed(0);
+                const msg = `Hola, quiero ${item.amount} ${item.label} (${game}). Precio: Bs. ${price}`;
+                const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+                cont.innerHTML += `
+                    <div class="card">
+                        <h3>${game}</h3>
+                        <div class="amount">${item.amount} ${item.label}</div>
+                        <div class="price">Bs. <span>${parseInt(price).toLocaleString()}</span></div>
+                        <a href="${link}" target="_blank" class="btn-buy whatsapp">📱 Comprar</a>
+                    </div>
+                `;
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', fetchRate);
+    </script>
+</body>
+</html>
