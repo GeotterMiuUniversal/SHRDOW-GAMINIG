@@ -294,6 +294,36 @@
             border-radius: 8px;
         }
 
+        /* --- AVISO DE NO DISPONIBLE --- */
+        .not-available-notice {
+            background: var(--card-bg);
+            border: 1px dashed var(--primary);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 600px;
+            margin: 40px auto;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .not-available-notice i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .not-available-notice h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .not-available-notice p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
         /* --- FOOTER --- */
         footer {
             text-align: center;
@@ -356,7 +386,18 @@
 
         <div id="ff" class="section-content"><div class="catalog-container"><h2 class="section-title">Free Fire</h2><div id="ff-products" class="products-grid"></div></div></div>
         <div id="bs" class="section-content"><div class="catalog-container"><h2 class="section-title">Blood Strike</h2><div id="bs-products" class="products-grid"></div></div></div>
-        <div id="ml" class="section-content"><div class="catalog-container"><h2 class="section-title">Mobile Legends</h2><div id="ml-products" class="products-grid"></div></div></div>
+        
+        <div id="ml" class="section-content">
+            <div class="catalog-container">
+                <h2 class="section-title">Mobile Legends</h2>
+                <div class="not-available-notice">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>No disponible en este momento</h3>
+                    <p>(Próximamente)</p>
+                </div>
+            </div>
+        </div>
+        
         <div id="roblox" class="section-content"><div class="catalog-container"><h2 class="section-title">Roblox</h2><div id="roblox-products" class="products-grid"></div></div></div>
         <div id="streaming" class="section-content"><div class="catalog-container"><h2 class="section-title">Pantallas de Streaming</h2><div id="streaming-products" class="products-grid"></div></div></div>
 
@@ -387,13 +428,6 @@
             { amount: '320 Blood Points', img: "https://raw.githubusercontent.com/GeotterMiuUniversal/shrdow-gaminig/refs/heads/main/320%20oro.jpg" },
             { amount: '1050 Blood Points', img: "https://raw.githubusercontent.com/GeotterMiuUniversal/shrdow-gaminig/refs/heads/main/1050%20oro.jpg" },
             { amount: 'Pase de Batalla', img: "https://raw.githubusercontent.com/GeotterMiuUniversal/shrdow-gaminig/refs/heads/main/pase%20de%20batalla%20blood%20strike.jpg" }
-        ];
-
-        // PRODUCTOS DE MOBILE LEGENDS
-        const mlData = [
-            { amount: 'Diamonds Semanales', img: "https://raw.githubusercontent.com/GeotterMiuUniversal/shrdow-gaminig/refs/heads/main/pantalla%20de%20inicio.jpg" },
-            { amount: 'Diamonds Mensuales', img: "https://raw.githubusercontent.com/GeotterMiuUniversal/shrdow-gaminig/refs/heads/main/pantalla%20de%20inicio.jpg" },
-            { amount: 'Twilight Pass', img: "https://raw.githubusercontent.com/GeotterMiuUniversal/shrdow-gaminig/refs/heads/main/pantalla%20de%20inicio.jpg" }
         ];
 
         // PRODUCTOS DE ROBLOX
@@ -473,7 +507,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadProducts(ffData, 'ff-products');
             loadProducts(bsData, 'bs-products');
-            loadProducts(mlData, 'ml-products');
             loadProducts(robloxData, 'roblox-products');
             loadProducts(streamingData, 'streaming-products');
         });
