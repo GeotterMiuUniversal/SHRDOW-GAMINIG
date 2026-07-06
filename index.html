@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHRDOW GAMING | Top Up y Servicios</title>
+    <title>SHRDOW GAMINIG | Top Up y Servicios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -192,17 +192,28 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- BIENVENIDA / INICIO --- */
-        .welcome-box {
-            text-align: center; 
-            padding: 60px 20px; 
-            background: rgba(20, 20, 20, 0.75); 
-            border-radius: 15px; 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            max-width: 800px;
+        /* --- BIENVENIDA / INICIO (ESTILO PORTADA) --- */
+        .welcome-container {
+            max-width: 550px;
             margin: 0 auto;
+            text-align: center;
+        }
+
+        .cover-img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 0, 43, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .welcome-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
 
         /* --- GRID DE PRODUCTOS --- */
@@ -275,10 +286,11 @@
 
         .btn-large {
             display: inline-block; 
-            width: auto; 
-            padding: 15px 40px; 
+            width: 80%; 
+            padding: 15px 30px; 
             font-size: 1.2rem;
-            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* --- FOOTER --- */
@@ -298,16 +310,16 @@
             .menu-btn { display: block; }
             .main-content { padding-top: 100px; }
             .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-            .welcome-box h1 { font-size: 1.8rem; }
+            .cover-img { max-width: 90%; }
         }
     </style>
 </head>
 <body>
 
-    <div id="bg-home" class="bg-overlay active" style="background-image: url('https://raw.githubusercontent.com/GeotterMiuUniversal/shrdow-gaminig/refs/heads/main/logo%20de%20inicio.jpg');"></div>
+    <div id="bg-home" class="bg-overlay active" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1470');"></div>
+    <div id="bg-ff" class="bg-overlay" style="background-image: url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=1470');"></div>
     <div id="bg-bs" class="bg-overlay" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1470');"></div>
     <div id="bg-ml" class="bg-overlay" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1471');"></div>
-    <div id="bg-ff" class="bg-overlay" style="background-image: url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=1470');"></div>
     <div id="bg-roblox" class="bg-overlay" style="background-image: url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1470');"></div>
     <div id="bg-streaming" class="bg-overlay" style="background-image: url('https://images.unsplash.com/photo-1574375927938-d5a98e8edd86?q=80&w=1470');"></div>
 
@@ -316,7 +328,7 @@
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <header>
-        <a href="#" class="logo">SHRDOW <span>GAMING</span></a>
+        <a href="#" class="logo">SHRDOW <span>GAMINIG</span></a>
         <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
     </header>
 
@@ -333,14 +345,16 @@
     <main class="main-content">
         
         <div id="home" class="section-content active">
-            <h2 class="section-title">Bienvenido</h2>
-            <div class="welcome-box">
-                <h1 style="font-size: 2.5rem; color: #ffffff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">TOP UP RÁPIDO Y SEGURO</h1>
-                <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.6;">
-                    Obtén diamantes, créditos, robux y tus pantallas de streaming al mejor precio del mercado. 
-                    <br><span style="color: var(--primary); font-weight: bold;">Entrega inmediata vía WhatsApp.</span>
+            <div class="welcome-container">
+                <img src="logo de inicio.jpg" alt="SHRDOW GAMINIG Portada" class="cover-img">
+                
+                <p class="welcome-text">
+                    Recargas inmediatas y 100% seguras. Elige tu apartado favorito en el menú para consultar disponibilidad.
                 </p>
-                <a href="#ff" onclick="showSection('ff', document.querySelectorAll('.nav-btn')[1], 'bg-ff')" class="btn-buy btn-large">Ver Catálogo</a>
+                
+                <a href="#ff" onclick="showSection('ff', document.querySelectorAll('.nav-btn')[1], 'bg-ff')" class="btn-buy btn-large">
+                    <i class="fas fa-shopping-cart"></i> Ver Catálogo
+                </a>
             </div>
         </div>
 
@@ -372,7 +386,7 @@
     </main>
 
     <footer>
-        <p>© 2026 SHRDOW GAMING. Todos los derechos reservados.</p>
+        <p>© 2026 SHRDOW GAMINIG. Todos los derechos reservados.</p>
     </footer>
 
     <script>
@@ -404,10 +418,12 @@
             { amount: 'Twilight Pass', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1553481187-be93c21490a9?w=400' }
         ];
 
+        // --- PAQUETES ROBLOX ACTUALIZADOS ---
         const robloxData = [
-            { amount: '80 Robux', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400' },
-            { amount: '400 Robux', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400' },
-            { amount: '800 Robux', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400' }
+            { amount: '282 Robux', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400' },
+            { amount: '475 Robux', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400' },
+            { amount: '539 Robux', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400' },
+            { amount: '1.000 Robux', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400' }
         ];
 
         const streamingData = [
@@ -422,19 +438,18 @@
 
         // --- FUNCIONES ---
 
-        // 1. Cargar productos dinámicamente
         function loadProducts(data, containerId) {
             const container = document.getElementById(containerId);
             if (!container) return;
             
             let html = '';
             data.forEach((item, index) => {
-                const mensaje = `Hola SHRDOW GAMING, quiero consultar el precio de: ${item.amount} (ID: ${containerId}-${index}).`;
+                const mensaje = `Hola SHRDOW GAMINIG, quiero consultar el precio de: ${item.amount} (ID: ${containerId}-${index}).`;
                 const urlWhatsApp = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
 
                 html += `
                     <div class="card">
-                        <img src="${item.img}" alt="${item.amount}" class="card-img" onerror="this.src='https://via.placeholder.com/300x160?text=SHRDOW+GAMING'">
+                        <img src="${item.img}" alt="${item.amount}" class="card-img" onerror="this.src='https://via.placeholder.com/300x160?text=SHRDOW+GAMINIG'">
                         <div class="card-body">
                             <h3>${item.amount}</h3>
                             <a href="${urlWhatsApp}" target="_blank" class="btn-buy">
@@ -447,7 +462,6 @@
             container.innerHTML = html;
         }
 
-        // 2. Control del Menú Hamburguesa Movil
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
@@ -455,24 +469,18 @@
             overlay.classList.toggle('active');
         }
 
-        // 3. Sistema para cambiar Secciones y cambiar Fondos Fluidos (Estilo Roblox)
         function showSection(sectionId, btnElement, bgId) {
-            // Ocultar contenidos antiguos
             document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
-            // Mostrar nueva seccion
             document.getElementById(sectionId).classList.add('active');
             
-            // Cambiar la imagen de fondo activando la capa correcta
             document.querySelectorAll('.bg-overlay').forEach(bg => bg.classList.remove('active'));
             if(bgId) {
                 document.getElementById(bgId).classList.add('active');
             }
 
-            // Actualizar estados del boton presionado
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             if(btnElement) btnElement.classList.add('active');
 
-            // Auto-cerrar menu en moviles al cliquear
             if(window.innerWidth <= 768) {
                 toggleMenu();
             }
@@ -480,7 +488,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- INICIALIZACIÓN AL CARGAR LA PÁGINA ---
         document.addEventListener('DOMContentLoaded', () => {
             loadProducts(ffData, 'ff-products');
             loadProducts(bsData, 'bs-products');
@@ -490,4 +497,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
