@@ -9,12 +9,12 @@
         :root {
             --primary: #ff002b; /* Rojo Gaming */
             --primary-hover: #ff3355;
-            --dark-bg: #0a0a0a; /* Fondo ultra oscuro */
-            --card-bg: rgba(26, 26, 26, 0.85); /* Gris oscuro con transparencia */
+            --dark-bg: #0a0a0a; 
+            --card-bg: rgba(20, 20, 20, 0.85); /* Gris un poco más sólido para las tarjetas */
             --sidebar-bg: rgba(15, 15, 15, 0.95);
-            --text-color: #ffffff; /* Blanco */
-            --text-muted: #cccccc; /* Blanco grisáceo */
-            --border-color: rgba(255, 0, 43, 0.2);
+            --text-color: #ffffff; 
+            --text-muted: #cccccc; 
+            --border-color: rgba(255, 0, 43, 0.3);
         }
 
         * { 
@@ -53,7 +53,7 @@
             transform: scale(1);
         }
 
-        /* Capa oscura superior para garantizar la legibilidad de las letras arriba del fondo */
+        /* CAPA DE TINTE CORREGIDA: Menos opacidad negra para que los fondos brillen y se vean claros */
         .dark-tint {
             position: fixed;
             top: 0;
@@ -61,7 +61,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(10,10,10,0.95) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(10, 10, 10, 0.6) 100%);
         }
 
         /* --- HEADER --- */
@@ -163,11 +163,16 @@
 
         /* --- CONTENIDO PRINCIPAL --- */
         .main-content {
-            padding: 120px 5% 50px;
+            padding: 100px 0px 50px; /* Ajustado para el diseño de pantalla completa en Inicio */
             max-width: 1400px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
+        }
+
+        /* Ajuste de padding lateral para los catálogos normales */
+        .catalog-container {
+            padding: 20px 5%;
         }
 
         .section-title {
@@ -192,28 +197,30 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- BIENVENIDA / INICIO (ESTILO PORTADA) --- */
-        .welcome-container {
-            max-width: 550px;
-            margin: 0 auto;
+        /* --- BIENVENIDA / INICIO (ESTILO PANTALLA COMPLETA) --- */
+        .welcome-full-width {
+            width: 100%;
             text-align: center;
+            position: relative;
         }
 
-        .cover-img {
-            width: 100%;
-            max-width: 450px;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(255, 0, 43, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 25px;
+        .cover-img-full {
+            width: 100vw;
+            max-height: 70vh; /* Ocupa gran parte de la altura visual */
+            object-fit: cover; /* Recorta perfectamente sin deformar la imagen */
+            border-bottom: 3px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 0, 43, 0.4);
+            margin-bottom: 30px;
         }
 
         .welcome-text {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            max-width: 600px;
+            margin: 0 auto 25px;
+            line-height: 1.6;
+            padding: 0 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
         /* --- GRID DE PRODUCTOS --- */
@@ -225,26 +232,26 @@
 
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             overflow: hidden;
             transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             display: flex;
             flex-direction: column;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px); /* Hace que las tarjetas resalten más sobre los fondos brillantes */
         }
 
         .card:hover {
             transform: translateY(-8px);
             border-color: var(--primary);
-            box-shadow: 0 12px 30px rgba(255, 0, 43, 0.25);
+            box-shadow: 0 12px 30px rgba(255, 0, 43, 0.4);
         }
 
         .card-img {
             width: 100%;
             height: 160px;
             object-fit: cover;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             background: #222;
         }
 
@@ -286,11 +293,13 @@
 
         .btn-large {
             display: inline-block; 
-            width: 80%; 
-            padding: 15px 30px; 
+            width: auto; 
+            min-width: 280px;
+            padding: 16px 40px; 
             font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border-radius: 8px;
         }
 
         /* --- FOOTER --- */
@@ -308,9 +317,9 @@
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .menu-btn { display: block; }
-            .main-content { padding-top: 100px; }
+            .main-content { padding-top: 75px; }
             .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-            .cover-img { max-width: 90%; }
+            .cover-img-full { max-height: 50vh; }
         }
     </style>
 </head>
@@ -345,42 +354,52 @@
     <main class="main-content">
         
         <div id="home" class="section-content active">
-            <div class="welcome-container">
-                <img src="https://raw.githubusercontent.com/GeotterMiuUniversal/shrdow-gaminig/refs/heads/main/logo%20de%20inicio.jpg" alt="SHRDOW GAMINIG Portada" class="cover-img">
+            <div class="welcome-full-width">
+                <img src="logo de inicio.jpg" alt="SHRDOW GAMINIG Portada" class="cover-img-full">
                 
                 <p class="welcome-text">
-                    Recargas inmediatas y 100% seguras. Elige tu apartado favorito en el menú para consultar disponibilidad.
+                    Recargas inmediatas y 100% seguras. Elige tu apartado favorito en el menú lateral para consultar la disponibilidad de diamantes, robux y pases.
                 </p>
                 
                 <a href="#ff" onclick="showSection('ff', document.querySelectorAll('.nav-btn')[1], 'bg-ff')" class="btn-buy btn-large">
-                    <i class="fas fa-shopping-cart"></i> Ver Catálogo
+                    <i class="fas fa-shopping-cart"></i> Ver Catálogo de Productos
                 </a>
             </div>
         </div>
 
         <div id="ff" class="section-content">
-            <h2 class="section-title">Free Fire</h2>
-            <div id="ff-products" class="products-grid"></div>
+            <div class="catalog-container">
+                <h2 class="section-title">Free Fire</h2>
+                <div id="ff-products" class="products-grid"></div>
+            </div>
         </div>
 
         <div id="bs" class="section-content">
-            <h2 class="section-title">Blood Strike</h2>
-            <div id="bs-products" class="products-grid"></div>
+            <div class="catalog-container">
+                <h2 class="section-title">Blood Strike</h2>
+                <div id="bs-products" class="products-grid"></div>
+            </div>
         </div>
 
         <div id="ml" class="section-content">
-            <h2 class="section-title">Mobile Legends</h2>
-            <div id="ml-products" class="products-grid"></div>
+            <div class="catalog-container">
+                <h2 class="section-title">Mobile Legends</h2>
+                <div id="ml-products" class="products-grid"></div>
+            </div>
         </div>
 
         <div id="roblox" class="section-content">
-            <h2 class="section-title">Roblox</h2>
-            <div id="roblox-products" class="products-grid"></div>
+            <div class="catalog-container">
+                <h2 class="section-title">Roblox</h2>
+                <div id="roblox-products" class="products-grid"></div>
+            </div>
         </div>
 
         <div id="streaming" class="section-content">
-            <h2 class="section-title">Pantallas de Streaming</h2>
-            <div id="streaming-products" class="products-grid"></div>
+            <div class="catalog-container">
+                <h2 class="section-title">Pantallas de Streaming</h2>
+                <div id="streaming-products" class="products-grid"></div>
+            </div>
         </div>
 
     </main>
@@ -390,7 +409,6 @@
     </footer>
 
     <script>
-        // --- CONFIGURACIÓN ---
         const whatsappNumber = "584262305112";
 
         // --- DATOS DE PRODUCTOS ---
@@ -418,7 +436,7 @@
             { amount: 'Twilight Pass', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1553481187-be93c21490a9?w=400' }
         ];
 
-        // --- PAQUETES ROBLOX ACTUALIZADOS ---
+        // PAQUETES ROBLOX SOLICITADOS
         const robloxData = [
             { amount: '282 Robux', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400' },
             { amount: '475 Robux', img: 'https://cdn.statically.io/img/images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400' },
@@ -437,7 +455,6 @@
         ];
 
         // --- FUNCIONES ---
-
         function loadProducts(data, containerId) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -497,4 +514,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
